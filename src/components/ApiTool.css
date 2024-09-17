@@ -1,0 +1,225 @@
+/* General Page Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f4f8;
+    color: #333;
+}
+
+.api-tool-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.header {
+    background-color: #007BFF;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 10px 10px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* API Tool Styles */
+.api-tool {
+    width: 80%;
+    max-width: 1200px;
+    background-color: white;
+    padding: 30px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.input-section {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input-box {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease;
+}
+
+.input-box:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+textarea.input-box {
+    height: 120px;
+    resize: none;
+}
+
+.fetch-btn {
+    background-color: #007BFF;
+    color: white;
+    font-size: 16px;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fetch-btn:hover {
+    background-color: #0056b3;
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.6);
+}
+
+.iterations-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.iterations-input label {
+    margin-right: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.iterations-input input {
+    width: 60px;
+    padding: 8px;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease;
+}
+
+.iterations-input input:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+/* Dropdown Style */
+.method-dropdown {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: white;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease;
+    width: 120px;
+}
+
+.method-dropdown:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+/* Response Box Styles */
+.response-box {
+    width: 45%;
+    height: 300px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow-y: auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.response-box pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.response-box p {
+    color: #777;
+    font-size: 14px;
+}
+
+/* Circular Stats Widget */
+.stats-widget {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.circle-widget {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+}
+
+.circular-chart {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+}
+
+.circle {
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.3s ease;
+}
+
+.circle.success {
+    stroke: #28a745;
+}
+
+.circle.error {
+    stroke: #dc3545;
+}
+
+.circle-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+}
+
+.circle-text span {
+    display: block;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+    .api-tool {
+        flex-direction: column;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .input-section, .response-box {
+        width: 100%;
+    }
+}
