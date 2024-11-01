@@ -1,108 +1,65 @@
-import React, { useState } from 'react';
-import './ApiTool.css';
+import React, { useState } from "react";
+import ApiStatsWidget from "./ApiStatsWidget";
 
-const ApiTool = () => {
-    const [url, setUrl] = useState('');
-    const [headers, setHeaders] = useState('');
-    const [responseData, setResponseData] = useState(null);
-    const [error, setError] = useState(null);
+function ApiTool() {
+    const [url, setUrl] = useState("");
+    const [method, setMethod] = useState("GET");
     const [iterations, setIterations] = useState(1);
-    const [responseStats, setResponseStats] = useState([]);
-    const [selectedMethod, setSelectedMethod] = useState('GET');
-
-    const determineHeaders = () => {
-        const headersObject = {};
-        headers.split('\n').forEach((header) => {
-            const [key, value] = header.split(':').map((str) => str.trim());
-            if (key && value) {
-                headersObject[key] = value;
-            }
-        });
-
-        if (!headersObject['Content-Type']) {
-            if (url.endsWith('.json')) {
-                headersObject['Content-Type'] = 'application/json';
-            } else if (url.endsWith('.xml')) {
-                headersObject['Content-Type'] = 'application/xml';
-            } else {
-                headersObject['Content-Type'] = 'text/plain';
-            }
-        }
-
-        return headersObject;
-    };
+    const [requestBody, setRequestBody] = useState("");
+    const [responseData, setResponseData] = useState(null);
+    const [stats, setStats] = useState([]);
 
     const handleApiCall = async () => {
-        setResponseStats([]); // Reset stats before each call
-        setResponseData(null); // Reset response data
-        setError(null); // Reset error message
-    
-        let stats = [];
-        const headerData = determineHeaders();
-    
+        setResponseData(null);
+        setStats([]);
+        const results = [];
+
         for (let i = 0; i < iterations; i++) {
             const start = performance.now();
             try {
                 const response = await fetch(url, {
-                    method: selectedMethod, // Add the selected HTTP method
-                    headers: headerData,
+                    method: method,
+                    headers: { "Content-Type": "application/json" },
+                    body: method === "GET" ? null : requestBody,
                 });
                 const data = await response.json();
                 const end = performance.now();
-    
-                setResponseData(JSON.stringify(data, null, 2)); // Format JSON nicely
-                stats.push({
+
+                results.push({
                     time: (end - start).toFixed(2),
                     status: response.status,
                     iteration: i + 1,
                 });
-            } catch (err) {
-                stats.push({
-                    time: 'N/A',
-                    status: 'Error',
-                    iteration: i + 1,
-                });
-                setError('Error fetching data. Check the URL or headers.');
+
+                if (i === 0) setResponseData(JSON.stringify(data, null, 2));
+            } catch (error) {
+                console.error("API call error:", error);
             }
         }
-        setResponseStats(stats); // Set the stats after the loop
-    };
-    
-
-    const calculateAverageTime = () => {
-        const validTimes = responseStats.filter(stat => stat.time !== 'N/A').map(stat => parseFloat(stat.time));
-        if (validTimes.length === 0) return 'N/A';
-        const avgTime = validTimes.reduce((acc, time) => acc + time, 0) / validTimes.length;
-        return avgTime.toFixed(2) + ' ms';
+        setStats(results);
     };
 
     return (
-        <div className="api-tool-container">
-            <header className="header">
-                <h1>API Tool</h1>
-            </header>
-            <div className="api-tool">
-                <div className="input-section">
-                    <select 
-                        value={selectedMethod}
-                        onChange={(e) => setSelectedMethod(e.target.value)}
+        <div className="api-tool">
+            <div className="input-section">
+                <div className="top-row">
+                    <select
                         className="method-dropdown"
+                        value={method}
+                        onChange={(e) => setMethod(e.target.value)}
                     >
                         <option value="GET">GET</option>
                         <option value="POST">POST</option>
                         <option value="DELETE">DELETE</option>
                     </select>
-                    <input 
+                    <input
                         type="text"
+                        placeholder="Enter API URL"
                         value={url}
                         onChange={(e) => setUrl(e.target.value)}
-                        placeholder="Enter API URL"
                         className="input-box"
                     />
-                    <button className="fetch-btn" onClick={handleApiCall}>
-                        ➔
-                    </button>
-                    <div className="iterations-input">
+                    <div className="iterations">
                         <label>x</label>
                         <input
                             type="number"
@@ -112,47 +69,24 @@ const ApiTool = () => {
                             className="small-input-box"
                         />
                     </div>
-
-                    {/* Stat Widget next to URL */}
-                    <div className="stats-widget">
-                        <h3>Stats</h3>
-                        <div className="circle-widget">
-                            <svg viewBox="0 0 36 36" className="circular-chart">
-                                {responseStats.map((stat, index) => (
-                                    <circle
-                                        key={index}
-                                        className={`circle ${stat.status === 200 ? 'success' : 'error'}`}
-                                        strokeDasharray={`${(100 / iterations) * (index + 1)} ${100 - (100 / iterations) * (index + 1)}`}
-                                        cx="18" cy="18" r="15.91549431"
-                                    />
-                                ))}
-                            </svg>
-                            <div className="circle-text">
-                                <span>{calculateAverageTime()}</span>
-                            </div>
-                        </div>
+                    <button className="fetch-btn" onClick={handleApiCall}>➔</button>
+                </div>
+                <textarea
+                    className="input-box"
+                    placeholder="Enter request body"
+                    value={requestBody}
+                    onChange={(e) => setRequestBody(e.target.value)}
+                />
+                <div className="response-section">
+                    <div className="response-box">
+                        <h3>Response</h3>
+                        <pre>{responseData || "Response will appear here"}</pre>
                     </div>
-                </div>
-
-                <div className="headers-section">
-                    <textarea
-                        value={headers}
-                        onChange={(e) => setHeaders(e.target.value)}
-                        placeholder="Enter headers in 'Key: Value' format"
-                        className="input-box"
-                    />
-                </div>
-
-                <div className="response-box">
-                    {responseData ? (
-                        <pre>{responseData}</pre>
-                    ) : (
-                        <p>{error ? error : "Response will be shown here"}</p>
-                    )}
+                    <ApiStatsWidget stats={stats} />
                 </div>
             </div>
         </div>
     );
-};
+}
 
 export default ApiTool;

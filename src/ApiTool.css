@@ -1,0 +1,54 @@
+/* General Styles */
+.header {
+    background-color: #007BFF;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.api-tool, .har-analyzer {
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 80%;
+    max-width: 800px;
+}
+
+.top-row, .response-section, .har-table {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.har-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.har-table th, .har-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.response-box, .stats-widget {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
