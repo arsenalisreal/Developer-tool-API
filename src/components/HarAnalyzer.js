@@ -1,67 +1,69 @@
-import React, { useState } from "react";
+// src/components/HarAnalyzer.js
 
-function HarAnalyzer() {
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './HarAnalyzer.css';
+
+const HarAnalyzer = () => {
     const [harData, setHarData] = useState([]);
-    
+    const navigate = useNavigate();
+
     const handleFileUpload = (event) => {
         const file = event.target.files[0];
         const reader = new FileReader();
-
         reader.onload = (e) => {
-            const data = JSON.parse(e.target.result);
-            const entries = data.log.entries.map((entry) => ({
-                url: entry.request.url,
+            const harContent = JSON.parse(e.target.result);
+            const entries = harContent.log.entries.map((entry) => ({
+                api: entry.request.url,
+                size: `${(entry.response.bodySize / 1024).toFixed(2)} KB`,
+                time: `${entry.time} ms`,
+                status: entry.response.status,
                 method: entry.request.method,
-                time: entry.time,
-                size: entry.request.bodySize,
+                requestBody: entry.request.postData?.text || '',
             }));
             setHarData(entries);
         };
-        
         reader.readAsText(file);
     };
 
-    const reExecuteApiCall = async (url, method) => {
-        try {
-            const response = await fetch(url, { method });
-            const result = await response.json();
-            console.log("Re-executed API response:", result);
-        } catch (error) {
-            console.error("Error re-executing API call:", error);
-        }
+    const handleReExecute = (api, method, requestBody) => {
+        navigate('/api-tool', { state: { api, method, requestBody } });
     };
 
     return (
         <div className="har-analyzer">
-            <input type="file" accept=".har" onChange={handleFileUpload} />
-            {harData.length > 0 && (
-                <table className="har-table">
-                    <thead>
-                        <tr>
-                            <th>URL</th>
-                            <th>Method</th>
-                            <th>Request Size (bytes)</th>
-                            <th>Time (ms)</th>
-                            <th>Actions</th>
+            <input type="file" accept=".har" onChange={handleFileUpload} className="upload-btn" />
+            <table className="har-table">
+                <thead>
+                    <tr>
+                        <th>API</th>
+                        <th>Size</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {harData.map((entry, index) => (
+                        <tr key={index}>
+                            <td>{entry.api}</td>
+                            <td>{entry.size}</td>
+                            <td>{entry.time}</td>
+                            <td>{entry.status}</td>
+                            <td>
+                                <button
+                                    onClick={() => handleReExecute(entry.api, entry.method, entry.requestBody)}
+                                    className="execute-btn"
+                                >
+                                    Re-Execute
+                                </button>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {harData.map((entry, index) => (
-                            <tr key={index}>
-                                <td>{entry.url}</td>
-                                <td>{entry.method}</td>
-                                <td>{entry.size}</td>
-                                <td>{entry.time}</td>
-                                <td>
-                                    <button onClick={() => reExecuteApiCall(entry.url, entry.method)}>Re-Execute</button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            )}
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
-}
+};
 
 export default HarAnalyzer;

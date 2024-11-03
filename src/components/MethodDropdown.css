@@ -1,0 +1,25 @@
+/* src/components/MethodDropdown.css */
+
+.method-dropdown {
+    padding: 5px;
+    border-radius: 8px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.method-dropdown.get {
+    color: green;
+}
+
+.method-dropdown.post {
+    color: orange;
+}
+
+.method-dropdown.put {
+    color: blue;
+}
+
+.method-dropdown.delete {
+    color: red;
+}

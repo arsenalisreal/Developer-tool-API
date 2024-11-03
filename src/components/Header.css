@@ -1,0 +1,23 @@
+/* src/components/Header.css */
+
+.header {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background-color: #007aff;
+    color: white;
+    justify-content: center;
+}
+
+.nav-button {
+    padding: 10px 20px;
+    border-radius: 12px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-button.active {
+    opacity: 0.6;
+    pointer-events: none;
+}

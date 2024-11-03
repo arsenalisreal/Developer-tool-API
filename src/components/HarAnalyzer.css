@@ -1,0 +1,51 @@
+/* src/components/HarAnalyzer.css */
+
+.har-analyzer {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 100%;
+}
+
+.upload-btn {
+    margin-bottom: 20px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.upload-btn:hover {
+    background-color: #0056b3;
+}
+
+.har-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.har-table th,
+.har-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.har-table th {
+    background-color: #f2f2f2;
+}
+
+.execute-btn {
+    padding: 5px 10px;
+    color: white;
+    background-color: #28a745;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.execute-btn:hover {
+    background-color: #218838;
+}

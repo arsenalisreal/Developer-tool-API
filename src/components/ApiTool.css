@@ -1,0 +1,60 @@
+/* src/components/ApiTool.css */
+
+.api-tool {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 200%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.api-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.url-input,
+.request-body {
+    width: 100%;
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.incrementer {
+    width: 50px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.submit-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #007aff;
+    color: white;
+    cursor: pointer;
+}
+
+.response-section {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.response-box {
+    flex-grow: 2;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f7f7f7;
+}
