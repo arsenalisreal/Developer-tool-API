@@ -14,23 +14,20 @@ function ApiTool() {
     const [stats, setStats] = useState([]);
 
     useEffect(() => {
-        if (location.state) {
-            setUrl(location.state.api);
-            setMethod(location.state.method);
+        if (location?.state) {
+            console.log('Prefilling form with state:', location.state);
+            setUrl(location.state.api || '');
+            setMethod(location.state.method || 'GET');
             setRequestBody(location.state.requestBody || '');
         }
-    }, [location.state]);
+    }, [location?.state]);
+
     const handleSubmit = async () => {
         try {
-            for (var i=0; i<increment;i++){
+            for (let i = 0; i < increment; i++) {
                 const startTime = Date.now();
 
-                // Debugging logs
-                console.log(`Method: ${method}`);
-                console.log(`URL: ${url}`);
-                console.log(`Request Body: ${requestBody}`);
-    
-                // Define fetch options based on dropdown method selection and requestBody
+                console.log(`Sending API Request: ${method} ${url}`);
                 const options = {
                     method,
                     headers: { 
@@ -39,25 +36,23 @@ function ApiTool() {
                     },
                     ...(method === 'POST' || method === 'PUT' ? { body: JSON.stringify(requestBody) } : {})
                 };
-    
-                // Send the API request and calculate response time
+
                 const apiResponse = await fetch(url, options);
                 if (!apiResponse.ok) {
                     throw new Error(`HTTP error! status: ${apiResponse.status}`);
                 }
-    
+
                 const data = await apiResponse.json();
                 const timeTaken = Date.now() - startTime;
-    
-                // Update response and stats
+
                 const result = {
                     message: data,
                     status: apiResponse.status,
                     time: timeTaken
                 };
-    
-                setResponse(result); // Display API response
-                setStats((prevStats) => [...prevStats, result]); // Track stats for display
+
+                setResponse(result);
+                setStats((prevStats) => [...prevStats, result]);
             }
         } catch (error) {
             setResponse({ message: `Error: ${error.message}`, status: 'Error', time: 0 });
@@ -91,7 +86,6 @@ function ApiTool() {
                 <button onClick={handleSubmit} className="submit-btn">Send</button>
             </div>
 
-            {/* Conditionally render request body input if POST or PUT is selected */}
             {['POST', 'PUT'].includes(method) && (
                 <textarea
                     className="request-body"
@@ -105,7 +99,7 @@ function ApiTool() {
                 <div className="response-box">
                     <pre>{response ? JSON.stringify(response, null, 2) : 'No response yet'}</pre>
                 </div>
-                <APIStatsWidget stats={stats} /> {/* Pass stats to APIStatsWidget */}
+                <APIStatsWidget stats={stats} />
             </div>
         </div>
     );
