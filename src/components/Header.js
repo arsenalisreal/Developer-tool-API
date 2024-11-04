@@ -1,17 +1,19 @@
 // src/components/Header.js
-
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Header.css';
+import bitsLogo from './../bits-logo.png'; // Make sure to place the logo in the appropriate folder
 
 const Header = () => (
     <header className="header">
-        <NavLink to="/apiTool" className={({ isActive }) => isActive ? 'nav-button active' : 'nav-button'}>
-            API Tool
-        </NavLink>
-        <NavLink to="/harAnalyzer" className={({ isActive }) => isActive ? 'nav-button active' : 'nav-button'}>
-            HAR Analyzer
-        </NavLink>
+        <div className="logo-container">
+            <img src={bitsLogo} alt="BITS Pilani Logo" className="logo" />
+            <span className="title">Developer Tool API</span>
+        </div>
+        <nav className="nav-links">
+            <Link to="/apiTool">API Tool</Link>
+            <Link to="/harAnalyzer">HAR Analyzer</Link>
+        </nav>
     </header>
 );
 

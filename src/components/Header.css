@@ -1,23 +1,40 @@
-/* src/components/Header.css */
-
+/* Header Styling */
 .header {
     display: flex;
-    gap: 20px;
-    padding: 20px;
-    background-color: #007aff;
-    color: white;
-    justify-content: center;
-}
-
-.nav-button {
+    align-items: center;
+    justify-content: space-between;
     padding: 10px 20px;
-    border-radius: 12px;
+    background-color: #007aff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Logo and Title Styling */
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    width: 100px; /* Adjust logo size as needed */
+    height: auto;
+    margin-right: 50px;
+  }
+  
+  .title {
+    font-size: 3.5em;
     color: white;
-    text-decoration: none;
     font-weight: bold;
-}
-
-.nav-button.active {
-    opacity: 0.6;
-    pointer-events: none;
-}
+  }
+  
+  /* Navigation Links Styling */
+  .nav-links a {
+    color: rgb(57, 11, 224);
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 2em;
+  }
+  
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+  
