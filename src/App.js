@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import ApiTool from './components/ApiTool';
 import HarAnalyzer from './components/HarAnalyzer';
+import JsonBeautifier from './components/JsonBeautifier';
 
 function App() {
     return (
@@ -13,6 +14,7 @@ function App() {
                 <Routes>
                     <Route path="/apiTool" element={<ApiTool />} />
                     <Route path="/harAnalyzer" element={<HarAnalyzer />} />
+                    <Route path="/jsonBeautifier" element={<JsonBeautifier />} />
                 </Routes>
             </div>
         </Router>

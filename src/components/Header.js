@@ -13,6 +13,7 @@ const Header = () => (
         <nav className="nav-links">
             <Link to="/apiTool">API Tool</Link>
             <Link to="/harAnalyzer">HAR Analyzer</Link>
+            <Link to="/jsonBeautifier">JSON</Link>
         </nav>
     </header>
 );
