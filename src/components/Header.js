@@ -14,6 +14,7 @@ const Header = () => (
             <Link to="/apiTool">API Tool</Link>
             <Link to="/harAnalyzer">HAR Analyzer</Link>
             <Link to="/jsonBeautifier">JSON</Link>
+            <Link to="/apiResponseComparator">Text Comparator</Link>
         </nav>
     </header>
 );

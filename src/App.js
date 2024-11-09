@@ -5,6 +5,7 @@ import Header from './components/Header';
 import ApiTool from './components/ApiTool';
 import HarAnalyzer from './components/HarAnalyzer';
 import JsonBeautifier from './components/JsonBeautifier';
+import ApiResponseComparator from './components/ApiResponseComparator';
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                 <Routes>
                     <Route path="/apiTool" element={<ApiTool />} />
                     <Route path="/harAnalyzer" element={<HarAnalyzer />} />
+                    <Route path="/apiResponseComparator" element={<ApiResponseComparator />} />
                     <Route path="/jsonBeautifier" element={<JsonBeautifier />} />
                 </Routes>
             </div>
