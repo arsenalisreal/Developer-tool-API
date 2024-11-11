@@ -13,13 +13,16 @@ function ApiStatsWidget({ stats = [] }) {
         return acc;
     }, {});
 
+    // Determine circle color based on status
+    const circleClass = statusCounts[200] === stats.length ? "success" : "error";
+
     return (
         <div className="stats-widget">
             <h3>API Stats</h3>
             <div className="circle-widget">
                 <div className="circular-chart">
                     <svg viewBox="0 0 36 36">
-                        <circle className="circle success" cx="18" cy="18" r="15.9" />
+                        <circle className={`circle ${circleClass}`} cx="18" cy="18" r="15.9" />
                     </svg>
                     <div className="circle-text">
                         <span>{avgTime} ms</span>

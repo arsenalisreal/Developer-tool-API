@@ -1,40 +1,48 @@
 /* Header Styling */
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-    background-color: #007aff;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Logo and Title Styling */
-  .logo-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  .logo {
-    width: 100px; /* Adjust logo size as needed */
-    height: auto;
-    margin-right: 50px;
-  }
-  
-  .title {
-    font-size: 3.5em;
-    color: white;
-    font-weight: bold;
-  }
-  
-  /* Navigation Links Styling */
-  .nav-links a {
-    color: rgb(57, 11, 224);
-    text-decoration: none;
-    margin-left: 20px;
-    font-size: 2em;
-  }
-  
-  .nav-links a:hover {
-    text-decoration: underline;
-  }
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 30px;
+  background-color: #007aff;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Logo Styling */
+.logo-container {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.logo {
+  width: 180px;
+  height: auto;
+}
+
+/* Navigation Links as Buttons */
+.nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-button {
+  background-color: #007aff;
+  color: black;
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 1.5em;
+  border: 2px solid #007aff;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-align: center;
+}
+
+.nav-button:hover {
+  background-color: #ffffff;
+  color: #007aff;
+  cursor: pointer;
+}

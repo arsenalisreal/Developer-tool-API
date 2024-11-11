@@ -86,7 +86,7 @@ function ApiTool() {
                 <button onClick={handleSubmit} className="submit-btn">Send</button>
             </div>
 
-            {['POST', 'PUT'].includes(method) && (
+            {(
                 <textarea
                     className="request-body"
                     placeholder="Request Body"
